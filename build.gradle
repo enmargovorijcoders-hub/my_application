@@ -1,13 +1,3 @@
-android {
-    namespace 'com.enmar.webwrapper'
-    compileSdk 34 // or your target sdk
-
-    defaultConfig {
-        applicationId "com.enmar.webwrapper"
-        minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-    }
-    // ...
+plugins {
+    id 'com.android.application' version '8.2.0' apply false
 }
