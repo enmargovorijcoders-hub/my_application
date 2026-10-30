@@ -6,6 +6,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -24,8 +26,31 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Create a root vertical layout to hold WebView and the slider
+        LinearLayout rootLayout = new LinearLayout(this);
+        rootLayout.setOrientation(LinearLayout.VERTICAL);
+
+        // Initialize WebView
         webView = new WebView(this);
-        setContentView(webView);
+        LinearLayout.LayoutParams webParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f);
+        webView.setLayoutParams(webParams);
+
+        // Initialize the Zoom Slider (SeekBar)
+        SeekBar zoomSeekBar = new SeekBar(this);
+        LinearLayout.LayoutParams seekParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        seekParams.setMargins(32, 16, 32, 16);
+        zoomSeekBar.setLayoutParams(seekParams);
+        
+        // Range: 80% to 200% (Total span = 120, default progress 40 -> 80 + 40 = 120%)
+        zoomSeekBar.setMax(120);
+        zoomSeekBar.setProgress(40);
+
+        // Add views to the root layout
+        rootLayout.addView(webView);
+        rootLayout.addView(zoomSeekBar);
+        setContentView(rootLayout);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -37,9 +62,25 @@ public class MainActivity extends Activity {
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
 
-        // 120% Scale & Text Zoom
+        // Initial default zoom (120%)
         webView.setInitialScale(120);
         webSettings.setTextZoom(120);
+
+        // Handle live zooming when the slider is moved
+        zoomSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int zoomLevel = 80 + progress; // Ranges from 80% to 200%
+                webSettings.setTextZoom(zoomLevel);
+                webView.evaluateJavascript("document.body.style.zoom='" + (zoomLevel / 100.0) + "';", null);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
