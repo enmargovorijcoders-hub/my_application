@@ -37,10 +37,9 @@ public class MainActivity extends Activity {
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
 
-        // --- SCALE / ZOOM ADJUSTMENT SET TO 160% ---
+        // Scale and text zoom set to 160%
         webView.setInitialScale(160);
         webSettings.setTextZoom(160);
-        // ------------------------------------------
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
