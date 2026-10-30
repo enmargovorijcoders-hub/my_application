@@ -37,9 +37,9 @@ public class MainActivity extends Activity {
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
 
-        // 160% Scale & Text Zoom
-        webView.setInitialScale(160);
-        webSettings.setTextZoom(160);
+        // 140% Scale & Text Zoom
+        webView.setInitialScale(140);
+        webSettings.setTextZoom(140);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
         });
 
         webView.loadUrl(TARGET_URL);
-    } // End of onCreate
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
             uploadMessage = null;
         }
         super.onActivityResult(requestCode, resultCode, data);
-    } // End of onActivityResult
+    }
 
     @Override
     public void onBackPressed() {
@@ -98,6 +98,5 @@ public class MainActivity extends Activity {
         } else {
             super.onBackPressed();
         }
-    } // End of onBackPressed
-
-} // End of MainActivity
+    }
+}
