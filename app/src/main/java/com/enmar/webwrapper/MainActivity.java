@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
         });
 
         webView.loadUrl(TARGET_URL);
-    }
+    } // End of onCreate
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
             uploadMessage = null;
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
+    } // End of onActivityResult
 
     @Override
     public void onBackPressed() {
@@ -98,6 +98,6 @@ public class MainActivity extends Activity {
         } else {
             super.onBackPressed();
         }
-    }
-}
-}
+    } // End of onBackPressed
+
+} // End of MainActivity
