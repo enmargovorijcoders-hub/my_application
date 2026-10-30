@@ -20,12 +20,14 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: true
 
       - name: Install Gradle 8.5
         run: |
           wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip
           unzip -q gradle-8.5-bin.zip
-          echo "$PWD/gradle-8.5-bin" >> $GITHUB_PATH
+          echo "$PWD/gradle-8.5/bin" >> $GITHUB_PATH
 
       - name: Build Debug APK
         run: gradle assembleDebug --stacktrace
