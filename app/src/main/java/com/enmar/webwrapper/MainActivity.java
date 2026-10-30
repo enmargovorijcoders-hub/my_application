@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
 
     private WebView webView;
     private ValueCallback<Uri[]> uploadMessage;
-    private final static int FILE_CHOOSER_RESULT_CODE = 1;
+    private static final int FILE_CHOOSER_RESULT_CODE = 1;
     private static final String TARGET_URL = "https://enmargovorijcoders-hub.github.io/my-webpage/";
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
 
-        // Scale and text zoom set to 160%
+        // 160% Scale & Text Zoom
         webView.setInitialScale(160);
         webSettings.setTextZoom(160);
 
@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
-            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
+            public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
                 if (uploadMessage != null) {
                     uploadMessage.onReceiveValue(null);
                     uploadMessage = null;
