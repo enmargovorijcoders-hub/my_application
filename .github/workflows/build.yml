@@ -1,8 +1,8 @@
-name: Build Android APK
+name: Build APK
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -13,23 +13,21 @@ jobs:
 
       - uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: 17
 
       - name: Accept Android licenses
         run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses || true
 
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.5'
+          gradle-version: 8.7
 
-      - name: Remove macOS junk files
-        run: find . -name ".DS_Store" -delete
-
-      - name: Clean and Build Debug APK with Info Logs
-        run: gradle clean assembleDebug --no-daemon --info
+      - name: Build release APK
+        run: gradle :app:assembleRelease --no-daemon
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: web-wrapper-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: ThePandSApp-apk
+          path: app/build/outputs/apk/release/*.apk
