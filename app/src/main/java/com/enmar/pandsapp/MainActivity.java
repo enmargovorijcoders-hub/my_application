@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 
         // The bar along the bottom.
         LinearLayout bar = new LinearLayout(this);
-        bar.setBackgroundColor(0xFF00FF00); // RGB 0, 255, 0
+        bar.setBackgroundColor(0xFF000000); // black
         bar.setGravity(Gravity.CENTER_VERTICAL);
         bar.setPadding(dp(8), dp(8), dp(8), dp(8));
 
@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
         track.setSize(dp(200), trackHeight);
 
         GradientDrawable fill = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{0xFFFFD000, 0xFFF5A800});
+                new int[]{0xFF00FF00, 0xFF00FF00}); // RGB 0, 255, 0
         fill.setCornerRadius(dp(12));
         fill.setSize(dp(200), trackHeight);
         ClipDrawable clip = new ClipDrawable(fill, Gravity.LEFT, ClipDrawable.HORIZONTAL);
@@ -153,6 +153,11 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onDestroy() {
+        web.destroy();
+        super.onDestroy();
+    }
+}
     protected void onDestroy() {
         web.destroy();
         super.onDestroy();
