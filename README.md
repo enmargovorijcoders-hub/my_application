@@ -1,6 +1,6 @@
 # The P&S App
 
-The P&S site in a small Android app (Android 4.0+, ARM and ARM64), with a zoom slider along the bottom.
+The P&S site in a small Android app (Android 4.0+, ARM and ARM64), with a zoom slider along the bottom. And its just a webwrapper using Android System Webview to show my site (https://enmargovorijcoders-hub.github.io/my-webpage/).
 
 Build: upload everything in this folder to a GitHub repository (branch `main`), open the Actions tab,
 and download the `ThePandSApp-apk` artifact when the run is green.
