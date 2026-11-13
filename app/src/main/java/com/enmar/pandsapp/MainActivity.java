@@ -20,7 +20,7 @@ import android.widget.SeekBar;
 
 /** The P&S site in a WebView, with a zoom slider along the bottom. */
 public class MainActivity extends Activity {
-    static final String HOME = "https://enmargovorijcoders-hub.github.io/my-webpage/";
+    static final String HOME = "https://p-and-s-webpage.web.app/";
     static final int MIN_ZOOM = 50;    // percent
     static final int MAX_ZOOM = 200;   // percent
     static final int DEFAULT_ZOOM = 100;
